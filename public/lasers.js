@@ -1,36 +1,61 @@
-class Laser {
-  constructor(name, position) {
-    this.name = name
-    this.position = position
-    this.sprite = SPRITES.laser
+class Laser extends Entity {
+  constructor(position) {
+    super(SPRITES.laser, position)
   }
-  move() {
+  move(addToActive) {
     const [x, y] = this.position
-    this.position = [x, y - 1]
-    return this
+    const newPosition = [Math.floor(x), Math.floor(y - 1)]
+    this.updatePosition(newPosition)
+    addToActive(`${newPosition}`)
   }
 }
 
 class Lasers {
-  next = 0
-  lasers = {}
+  lasers = []
+  active = new Set()
+  clearActive() {
+    this.active = new Set()
+  }
+  addToActive = (location) => {
+    this.active.add(location)
+  }
+  has(location) {
+    return this.active.has(location)
+  }
   addLaser(position) {
-    const name = `LASER_${this.next}`
-    this.lasers[name] = new Laser(name, position)
-    this.next = this.next + 1
-  }
-  removerLaser(name) {
-    delete this[name]
-  }
-  getAll() {
-    return Object.values(this.lasers)
+    this.lasers.push(new Laser(position))
   }
   forEach(cb) {
-    Object.values(this.lasers).forEach(cb)
+    this.lasers.forEach(cb)
   }
   move() {
-    this.forEach((laser) => {
-      this.lasers[laser.name] = laser.move()
-    })
+    this.clearActive()
+    this.lasers.forEach(
+      (laser) => laser.move(this.addToActive)
+    )
   }
 }
+
+// class Lasers {
+//   next = 0
+//   lasers = {}
+//   addLaser(position) {
+//     const name = `LASER_${this.next}`
+//     this.lasers[name] = new Laser(name, position)
+//     this.next = this.next + 1
+//   }
+//   removerLaser(name) {
+//     delete this[name]
+//   }
+//   getAll() {
+//     return Object.values(this.lasers)
+//   }
+//   forEach(cb) {
+//     Object.values(this.lasers).forEach(cb)
+//   }
+//   move() {
+//     this.forEach((laser) => {
+//       laser.move()
+//     })
+//   }
+// }

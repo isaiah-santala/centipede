@@ -4,29 +4,47 @@ scale = 2
 ctx.scale(scale, scale)
 
 const bounds = {
-  width: [0, canvas.width / scale],
-  height: [0, canvas.height / scale]
+  width: [0, (canvas.width / scale) - 1],
+  height: [0, (canvas.height / scale) - 1]
 }
 
+let pixels = []
 const player = new Player(bounds)  
 const lasers = new Lasers()
+const enemies = new Enemies()
+enemies.addEnemy(new Spider())
 
 const clearCanvas = () => ctx.clearRect(
-  bounds.x[0], 
-  bounds.y[0], 
-  bounds.x[1] + 1, 
-  bounds.y[1] + 1
+  bounds.width[0], 
+  bounds.height[0], 
+  bounds.width[1] + 1, 
+  bounds.height[1] + 1
 )
 
-const paint = ({ x, y, color }, [x_loc, y_loc]) => {
+const paint = ([x, y, color]) => {
   ctx.fillStyle = color
-  ctx.fillRect((x + x_loc), (y + y_loc), 1, 1)
+  ctx.fillRect(x, y, 1, 1)
 }
-const paintEntity = ({ sprite, position }) => sprite.image.forEach((pixel) => paint(pixel, position))
 const paintGame = () => {
   clearCanvas()
-  lasers.forEach(paintEntity)
-  paintEntity(player)
+  pixels.forEach(paint)
+}
+
+const moveEntities = () => {
+  lasers.move()
+  enemies.move(lasers)
+  player.move(bounds)
+}
+const storePixels = ({ pixelData }) => pixels = [...pixels, ...pixelData]
+const updateEntitiesState = () => {
+  pixels = []
+  lasers.forEach(storePixels)
+  enemies.forEach(storePixels)
+  storePixels(player)
+}
+const updateEntities = () => {
+  moveEntities()
+  updateEntitiesState()
 }
 
 const shoot = () => {
@@ -34,7 +52,6 @@ const shoot = () => {
 }
 
 const isDirection = (str) => DIRECTIONS[str] !== undefined
-const moveIsValid = () => 
 
 const handleAction = (action, type) => {
   if (!action) return;
@@ -51,11 +68,10 @@ const handleKeyUp = ({ key }) => handleAction(KEYBINDINGS[key], 'keyup')
 document.addEventListener('keydown', handleKeyDown)
 document.addEventListener('keyup', handleKeyUp)
 
-const gameLoop = () => {  
-  lasers.move()
-  player.move()
+const gameLoop = () => { 
+  updateEntities()
   paintGame()
 }
 
-// const step = setInterval(gameLoop, 50)
+const step = setInterval(gameLoop, 50)
 paintGame()

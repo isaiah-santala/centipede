@@ -9,3 +9,10 @@ const KEYBINDINGS = {
   'ArrowDown': 'DOWN',
   ' ': 'SHOOT'
 }
+
+const DIRECTIONS = {
+  'LEFT': true,
+  'RIGHT': true,
+  'UP': true,
+  'DOWN': true,
+}

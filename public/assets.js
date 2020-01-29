@@ -1,5 +1,6 @@
 const SPRITES = {
   player: {
+    name: 'PLAYER',
     dimensions: [6, 7],
     sprite: [
       { x: 3, y: 0, color: 'beige' },
@@ -47,6 +48,7 @@ const SPRITES = {
   },
 
   mushroom: {
+    name: 'MUSHROOM',
     dimensions: [7, 7],
     sprite: [
       { x: 2, y: 0, color: 'red' },
@@ -106,6 +108,7 @@ const SPRITES = {
   },
 
   spider: {
+    name: 'SPIDER',
     dimensions: [11, 7],
     sprite: [
       { x: 3, y: 0, color: 'tan'},
@@ -165,6 +168,7 @@ const SPRITES = {
   },
 
   laser: {
+    name: 'LASER',
     dimensions: [0, 3],
     sprite: [
       { x: 0, y: 0, color: 'red' },
@@ -174,11 +178,3 @@ const SPRITES = {
     ]
   }
 }
-
-const DIRECTIONS = {
-  'LEFT': true,
-  'RIGHT': true,
-  'UP': true,
-  'DOWN': true,
-}
-

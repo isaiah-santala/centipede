@@ -1,0 +1,9 @@
+
+entities [player, lasers, spider, mushrooms, centipede nodes]
+- sprite 
+- location 
+
+
+- pixel data (pixel data for: entities)
+  - paint
+    - canvas
