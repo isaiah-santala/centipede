@@ -14,11 +14,11 @@ const lasers = new Lasers()
 const enemies = new Enemies()
 enemies.addEnemy(new Spider())
 
-const clearCanvas = () => ctx.clearRect(
-  bounds.width[0], 
-  bounds.height[0], 
-  bounds.width[1] + 1, 
-  bounds.height[1] + 1
+const clearCanvas = ({width, height}) => ctx.clearRect(
+  width[0], 
+  height[0], 
+  width[1] + 1, 
+  height[1] + 1
 )
 
 const paint = ([x, y, color]) => {
@@ -26,7 +26,7 @@ const paint = ([x, y, color]) => {
   ctx.fillRect(x, y, 1, 1)
 }
 const paintGame = () => {
-  clearCanvas()
+  clearCanvas(bounds)
   pixels.forEach(paint)
 }
 
@@ -53,7 +53,7 @@ const shoot = () => {
 
 const isDirection = (str) => DIRECTIONS[str] !== undefined
 
-const handleAction = (action, type) => {
+const handleKeyAction = (action, type) => {
   if (!action) return;
   else if (action === 'SHOOT') shoot()
   else if (isDirection(action)) {
@@ -62,8 +62,8 @@ const handleAction = (action, type) => {
   }
 }
 
-const handleKeyDown = ({ key }) => handleAction(KEYBINDINGS[key], 'keydown')
-const handleKeyUp = ({ key }) => handleAction(KEYBINDINGS[key], 'keyup')
+const handleKeyDown = ({ key }) => handleKeyAction(KEYBINDINGS[key], 'keydown')
+const handleKeyUp = ({ key }) => handleKeyAction(KEYBINDINGS[key], 'keyup')
 
 document.addEventListener('keydown', handleKeyDown)
 document.addEventListener('keyup', handleKeyUp)

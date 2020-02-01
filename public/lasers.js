@@ -31,31 +31,7 @@ class Lasers {
   move() {
     this.clearActive()
     this.lasers.forEach(
-      (laser) => laser.move(this.addToActive)
+      (laser, i) => laser.move(this.addToActive)
     )
   }
 }
-
-// class Lasers {
-//   next = 0
-//   lasers = {}
-//   addLaser(position) {
-//     const name = `LASER_${this.next}`
-//     this.lasers[name] = new Laser(name, position)
-//     this.next = this.next + 1
-//   }
-//   removerLaser(name) {
-//     delete this[name]
-//   }
-//   getAll() {
-//     return Object.values(this.lasers)
-//   }
-//   forEach(cb) {
-//     Object.values(this.lasers).forEach(cb)
-//   }
-//   move() {
-//     this.forEach((laser) => {
-//       laser.move()
-//     })
-//   }
-// }

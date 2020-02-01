@@ -1,8 +1,8 @@
 [x] a player should be able to exceed game bounds
-
-[ ] a player should be able to kill an enemy by shooting them 
+[x] a player should be able to kill an enemy by shooting them 
 
 [ ] lasers should be deleted after leaving game bounds
+
 [ ] a player should get points for killing an enemy
 [ ] a player should be able to see their score
 [ ] a player should be able to move diagonally 
