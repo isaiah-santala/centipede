@@ -10,7 +10,7 @@ class Entity {
     this.updatePosition(startingPosition)
   }
 
-  updatePixelData([x_loc, y_loc]) {
+  getPixelData([x_loc, y_loc]) {
     return this.sprite.sprite.map(({ x, y, color, name }) => {
       return [(x + x_loc), (y_loc + y), color, name]
     })
@@ -19,6 +19,6 @@ class Entity {
     const [width, height] = this.sprite.dimensions
     this.nose = [x + (width / 2), y - (height / 2)]
     this.position = [x, y]
-    this.pixelData = this.updatePixelData([x, y])
+    this.pixelData = this.getPixelData([x, y])
   }
 }

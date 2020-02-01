@@ -111,7 +111,7 @@ const SPRITES = {
     name: 'SPIDER',
     dimensions: [11, 7],
     sprite: [
-      { x: 3, y: 0, color: 'tan'},
+      { x: 3, y: 0, color: 'tan' },
       { x: 11, y: 0, color: 'tan' },
 
       { x: 3, y: 1, color: 'tan' },
@@ -129,7 +129,7 @@ const SPRITES = {
       { x: 7, y: 3, color: 'limeGreen' },
       { x: 8, y: 3, color: 'red' },
       { x: 9, y: 3, color: 'tan' },
-      { x: 13, y: 3, color: 'tan' },    
+      { x: 13, y: 3, color: 'tan' },
 
       { x: 0, y: 4, color: 'tan' },
       { x: 3, y: 4, color: 'tan' },
@@ -139,7 +139,7 @@ const SPRITES = {
       { x: 8, y: 4, color: 'red' },
       { x: 9, y: 4, color: 'red' },
       { x: 11, y: 4, color: 'tan' },
-      { x: 14, y: 4, color: 'tan' }, 
+      { x: 14, y: 4, color: 'tan' },
 
       { x: 3, y: 5, color: 'tan' },
       { x: 5, y: 5, color: 'limeGreen' },

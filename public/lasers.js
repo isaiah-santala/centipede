@@ -2,36 +2,35 @@ class Laser extends Entity {
   constructor(position) {
     super(SPRITES.laser, position)
   }
-  move(addToActive) {
+  move(updateLaser) {
     const [x, y] = this.position
     const newPosition = [Math.floor(x), Math.floor(y - 1)]
     this.updatePosition(newPosition)
-    addToActive(`${newPosition}`)
+    updateLaser(this.position, newPosition)
   }
 }
 
 class Lasers {
-  lasers = []
-  active = new Set()
-  clearActive() {
-    this.active = new Set()
-  }
-  addToActive = (location) => {
-    this.active.add(location)
+  lasers = {}
+  clearLasers() {
+    this.lasers = {}
   }
   has(location) {
-    return this.active.has(location)
+    return this.lasers[location] !== undefined
   }
   addLaser(position) {
-    this.lasers.push(new Laser(position))
+    this.lasers[position] = new Laser(position)
+  }
+  updateLaser(oldPosition, newPosition) {
+    // delete this.lasers[oldPosition]
+    // this.lasers[newPosition] = new Laser(newPosition)
   }
   forEach(cb) {
-    this.lasers.forEach(cb)
+    Object.values(this.lasers).forEach(cb)
   }
   move() {
-    this.clearActive()
-    this.lasers.forEach(
-      (laser, i) => laser.move(this.addToActive)
+    this.forEach(
+      (laser) => laser.move(this.updateLaser)
     )
   }
 }
